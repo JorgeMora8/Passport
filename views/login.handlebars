@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+   <h1 class="FormularioTitulo">Rellena el formulario para entrar en la pagina</h1>
+   <div class="formularioArea">
+    <form action="/auth/login" method="post" id="userSubmit">
+      <input type="email" class="input" name="username" placeholder="Ingrese su email"/>
+      <input type="password" class="input" name="password" placeholder="Ingrese su contraseña"/>
+      <button type="submit" value="submit" class="btnFormularioLogIn">Ingresar</button>
+      <button><a href="/auth/register">Ir a registrarse</a></button>
+    </form>
+    </div>
+</body>
+</html>
