@@ -1,16 +1,14 @@
-const express = require("express"); 
-const {Server:HttpServer} = require("http"); 
-const {Server:IOServer} = require("socket.io"); 
-const {schema, normalize} = require("normalizr")
-const session = require("express-session") 
+import express from "express"; 
+import productosRouter from "../router/Productos_test.js";
+import {engine} from "express-handlebars"; 
+import session from "express-session"; 
+import {configSession} from "../config/configDATA.js";
+import {passportMiddleware, passportSessionHanlder} from "../middleware/passport.js";
 
 
 const app = express(); 
-const httpServer = new HttpServer(app); 
-const io = new IOServer(httpServer); 
-const configSession = require("../config/configDATA.js")
-const {passportMiddleware, passportSessionHanlder} = require("../middleware/passport.js")
-
+ 
+//=>Usos
 app.use(express.static("public")); 
 app.use(express.urlencoded({extended:true})); 
 app.use(express.json());
@@ -18,19 +16,43 @@ app.use(session(configSession))
 app.use(passportMiddleware); 
 app.use(passportSessionHanlder)
 
+
+//=>Handlebars
 const handlebarsConfig = {defaultlayout: "main.handlebars"}
-const {engine} = require("express-handlebars"); 
 app.engine("handlebars", engine(handlebarsConfig)); 
 app.set("view engine", ".handlebars"); 
 app.set("views", "./views");
 
-const productosRouter = require("../router/Productos_test.js")
+
 app.use("/api/productosTest", productosRouter)
 
 
+export {app}
 
 
 
 
 
-module.exports = app
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import http from "http"; 
+// import {Server} from "socket.io"; 
+// const httpServer = http.createServer(app); 
+// const io = new Server(httpServer);
+
+
+
+
+

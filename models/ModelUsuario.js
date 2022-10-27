@@ -1,5 +1,7 @@
-const {obtenerId} = require("./IdModel.js")
+import {obtenerId} from "./IdModel.js";
 
+
+//=>Datos de usuario
 function crearUsuario({id=obtenerId(), username, password}){ 
     if(!username){ 
         throw new Error("Error: No se encuentran datos en el campo username")
@@ -18,7 +20,7 @@ function crearUsuario({id=obtenerId(), username, password}){
 }
 
 
-module.exports = { 
+export { 
     crearUsuario
 }
 

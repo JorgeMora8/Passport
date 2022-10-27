@@ -1,6 +1,6 @@
 //=>Exportacion de middlewares de autenticacion; 
 
-function requireAuthentication(req, res, next){ 
+export function requireAuthentication(req, res, next){ 
     if(req.isAuthenticated()){ 
         next(); 
     }else{ 
@@ -8,7 +8,7 @@ function requireAuthentication(req, res, next){
     }
 }
 
- function isLogedIn(req,res,next){ 
+export function isLogedIn(req,res,next){ 
     if(req.isAuthenticated()){ 
         res.redirect("/"); 
     }else{ 
@@ -16,7 +16,3 @@ function requireAuthentication(req, res, next){
     }
 }
 
-module.exports = { 
-    requireAuthentication, 
-    isLogedIn
-}

@@ -1,7 +1,10 @@
-const {ContendorUsuarios} = require("../ContenedorMongoDB/DAOMongo.js"); 
+import {ContendorUsuarios} from "../ContenedorMongoDB/DAOMongo.js"; 
 
-async function autenticar(username, password){ 
+
+//=>Funcion para autenticar a los usuarios
+export async function autenticar(username, password){ 
     let usuario; 
+    console.log(username, password)
     try {
         usuario = await ContendorUsuarios.obtenerUsuarioPorNombre(username); 
     } catch (error) {
@@ -11,10 +14,5 @@ async function autenticar(username, password){
     if(usuario.password !== password){ 
         throw new Error("La contraseña no coincide")
     }
-
     return usuario
-}
-
-module.exports = { 
-    autenticar
 }

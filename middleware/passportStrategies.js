@@ -1,12 +1,12 @@
-const Strategy = require("passport-local").Strategy; 
+import {Strategy} from "passport-local"
 
-const {autenticar} = require("../API/Autenticar");
-const {asegurarNombreUnico} = require("../API/Usuario"); 
-const {crearUsuario} = require("../models/ModelUsuario"); 
-const {ContendorUsuarios} = require("../ContenedorMongoDB/DAOMongo.js")
+import {autenticar} from "../API/Autenticar.js";
+import asegurarNombreUnico from "../API/Usuario.js"; 
+import {crearUsuario} from "../models/ModelUsuario.js"; 
+import {ContendorUsuarios} from "../ContenedorMongoDB/DAOMongo.js";
 
 
-const registroLocal = new Strategy({
+export const registroLocal = new Strategy({
     passReqToCallback:true, 
 }, 
     async (req, username, password, done) => { 
@@ -26,7 +26,7 @@ const registroLocal = new Strategy({
     }
 )
 
-const loginLocal = new Strategy(
+export const loginLocal = new Strategy(
     async (username, password, done) => { 
         try {
 
@@ -40,7 +40,7 @@ const loginLocal = new Strategy(
         }
     }
 )
-module.exports = { 
-    registroLocal, 
-    loginLocal
-}
+// module.exports = { 
+//     registroLocal, 
+//     loginLocal
+// }

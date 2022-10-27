@@ -1,11 +1,11 @@
-const mongoose = require("mongoose"); 
+import mongoose from "mongoose"; 
 const uri = "mongodb://localhost:27017"; 
 
 mongoose.connect(uri); 
 
 
-//=>Contenedor de mensajes usango MongoDB
-class Contenedor{ 
+//=>Contenedor 
+export default class Contenedor{ 
     constructor(schema){ 
         this.schema = schema
     }
@@ -22,15 +22,18 @@ class Contenedor{
         return await this.schema.find({}, { _id: 0, __v: 0 }).lean();
       };
 
-      async obtenerUsuarioPorNombre(user){ 
+      async obtenerUsuarioPorNombre(userName){ 
         try {
-          const usuario = await this.schema.findOne({username:user}, {_id:0, __v:0})
+          const usuario = await this.schema.findOne({username:userName}, {_id:0, __v:0})
+          
           if(!usuario){ 
             return null
           }
+          return usuario
         } catch (error) {
           console.log(error)
         }
+        
       }
 
       async obtenerUsuarioPorId(idUsuario){ 
@@ -48,7 +51,7 @@ class Contenedor{
 
       async guardarUsuario(DatosUsuario){ 
         try {
-          await this.collection.create({username:DatosUsuario.username, password:DatosUsuario.password, id:DatosUsuario.password});
+          await this.schema.create({username:DatosUsuario.username, password:DatosUsuario.password, id:DatosUsuario.password});
         } catch (error) {
           console.log(error)
         }
@@ -65,4 +68,3 @@ class Contenedor{
 
     };
 
-module.exports = Contenedor

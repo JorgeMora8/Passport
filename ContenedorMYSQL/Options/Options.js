@@ -1,4 +1,4 @@
-const Options = {
+export const Options = {
     client: "mysql",
     connection: {
       host: "127.0.0.1",
@@ -9,4 +9,3 @@ const Options = {
     },
   };
   
-  module.exports = Options;

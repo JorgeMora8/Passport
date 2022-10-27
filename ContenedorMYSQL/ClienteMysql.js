@@ -1,7 +1,6 @@
-const ContenedorMysql = require("./Contenedor"); 
-const Options = require("./Options/Options"); 
+import ContenedorMysql from "./Contenedor.js"; 
+import {Options} from "./Options/Options.js"; 
 
-const ClienteMysql = new ContenedorMysql(Options)
+export const ClienteMysql = new ContenedorMysql(Options)
 
-module.exports = ClienteMysql; 
 

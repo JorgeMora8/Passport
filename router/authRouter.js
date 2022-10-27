@@ -1,7 +1,7 @@
-const express = require("express"); 
-const {isLogedIn} = require("../middleware/auth.js")
+import express from "express"; 
+import {isLogedIn} from "../middleware/auth.js";
 
-const {
+import {
     registroController, 
     loginController, 
 
@@ -15,9 +15,12 @@ const {
 
     getRegisterController, 
     getLoginController
-} = require("../Controllers/authController.js"); 
+} from "../Controllers/authController.js"; 
 
 const AuthRouter = express.Router(); 
+
+AuthRouter.use(express.json()); 
+AuthRouter.use(express.urlencoded({extended:true}))
 
 //=>Registro
 AuthRouter.get("/register", isLogedIn, getRegisterController); 
@@ -33,7 +36,7 @@ AuthRouter.get("/failureLogin", failLoginController);
 
 AuthRouter.get("/logout", logoutController)
 
-module.exports = { 
+export { 
     AuthRouter
 }
 

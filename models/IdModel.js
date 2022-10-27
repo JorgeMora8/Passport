@@ -2,6 +2,6 @@ function obtenerId(){
     return `${Date.now()}`
 }
 
-module.exports = { 
+export { 
     obtenerId
 }

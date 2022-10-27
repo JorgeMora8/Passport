@@ -1,6 +1,7 @@
-const faker = require("faker");
+//=>Productos Faker
+import faker from "faker";
 
-const Productos = [
+export const Productos = [
     {
         nombre:faker.commerce.productName(), 
         precio:faker.commerce.price(), 
@@ -28,4 +29,3 @@ const Productos = [
     },
 ]
 
-module.exports = Productos;

@@ -1,4 +1,4 @@
-const passport = require("passport"); 
+import passport from "passport"; 
 
 const registroController = passport.authenticate("registro", { 
     successRedirect:"/auth/successRegister", 
@@ -22,7 +22,8 @@ function successLoginController(req, res) {
     res.redirect("/")
 }
 
-function failLoginController(req, res) { 
+function failLoginController(req, res) {
+   
     res.render("failLogin")
 }
 
@@ -47,7 +48,7 @@ function getLoginController(req,res){
     res.render("login")
 }
 
-module.exports = { 
+export { 
     registroController, 
     loginController, 
 

@@ -1,13 +1,13 @@
-const express = require("express"); 
+import express from "express"; 
 const router = express.Router(); 
 
 
 //=>Productos provenientes de faker.js; 
-const listaProductos = require("../ProductosFaker/ProductosFaker")
+import {Productos} from "../ProductosFaker/ProductosFaker.js";
 
 router.get("/", (req, res) => { 
-    res.render("productos.handlebars", {productos: listaProductos})
+    res.render("productos.handlebars", {productos: Productos})
 })
 
 
-module.exports = router
+export default router

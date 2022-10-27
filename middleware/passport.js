@@ -1,12 +1,14 @@
-const passport = require("passport"); 
+import passport from "passport"; 
 
-const {registroLocal, loginLocal} = require("./passportStrategies.js"); 
-const {ContendorUsuarios} = require("../ContenedorMongoDB/DAOMongo.js"); 
+//=>Importacion de estrategia[Passport.js]
+import {registroLocal, loginLocal} from "./passportStrategies.js"; 
+
+import {ContendorUsuarios} from "../ContenedorMongoDB/DAOMongo.js"; 
 
 passport.use("registro", registroLocal); 
 passport.use("login", loginLocal); 
 
-const passportMiddleware = passport.initialize(); 
+export const passportMiddleware = passport.initialize(); 
 
 passport.serializeUser((user, done) => { 
     done(null, user.id)
@@ -22,9 +24,9 @@ passport.deserializeUser( async (id, done) => {
     }   
 })
 
-const passportSessionHanlder = passport.session()
+export const passportSessionHanlder = passport.session()
 
-module.exports = { 
-    passportMiddleware, 
-    passportSessionHanlder
-}
+// module.exports = { 
+//     passportMiddleware, 
+//     passportSessionHanlder
+// }

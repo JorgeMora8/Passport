@@ -1,14 +1,18 @@
-const app = require("../app/app.js");
-const { Server: HttpServer } = require("http");
-const { Server: IOServer } = require("socket.io");
-const { schema, normalize } = require("normalizr");
-const ClienteMysql = require("../ContenedorMYSQL/ClienteMysql");
-const chatContenedor = require("../ContenedorMongoDB/DAOMongo.js");
-const messageSchema = require("../normalizr/NormalizrSchema.js");
-const PORT = 5000;
-const httpServer = new HttpServer(app);
-const io = new IOServer(httpServer);
+//=>Importaciones
+import {app} from "../app/app.js";
+import http from "http";
+import { Server } from "socket.io";
+import { normalize } from "normalizr";
+import {ClienteMysql} from "../ContenedorMYSQL/ClienteMysql.js";
+import {chatContenedor} from "../ContenedorMongoDB/DAOMongo.js";
+import {messageSchema} from "../normalizr/NormalizrSchema.js";
 
+
+const PORT = 5000;
+const httpServer = http.createServer(app);
+const io = new Server(httpServer);
+
+//=>Inicializacion de server
 const server = httpServer.listen(PORT, () => {
   console.log("Usando el puerto: " + PORT);
 });
@@ -16,17 +20,16 @@ server.on("error", (err) => {
   console.log(err);
 });
 
+//=>Importacion de Routers
+import {AuthRouter} from "../router/authRouter.js"; 
+import {HomeRoot} from "../router/root.js";
 
 
-const {AuthRouter} = require("../router/authRouter.js"); 
-const {HomeRoot} = require("../router/root.js")
-
-
-//=>Rutas
+//=>Instalacion de Routers
 app.use("/auth", AuthRouter); 
 app.use("/", HomeRoot)
 
-
+//=>Chat Socket.Io
 io.on("connection", async (socket) => {
   socket.emit("productos", await ClienteMysql.ObtenerProductos());
   socket.emit(
