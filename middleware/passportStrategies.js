@@ -30,7 +30,7 @@ export const loginLocal = new Strategy(
     async (username, password, done) => { 
         try {
 
-            const usuario = await autenticar(username, password); 
+            const usuario = autenticar(username, password); 
             done(null, usuario)
 
         } catch (error) {
@@ -40,7 +40,4 @@ export const loginLocal = new Strategy(
         }
     }
 )
-// module.exports = { 
-//     registroLocal, 
-//     loginLocal
-// }
+

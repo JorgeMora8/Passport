@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Informacion del proceso:</h1>
+    <ul>
+        <li><b>Plataforma:</b> {{{data.plataforma}}}</li>
+        <li><b>Id del proceso:</b> {{{data.idProceso}}}</li>
+        <li><b>directorio actual:</b> {{{data.directorio}}}</li>
+        <li><b>Titulo del proceso:</b> {{{data.tituloProceso}}}</li>
+        <li><b>version de Node.js:</b> {{{data.version}}}</li>
+    </ul>
+    <h1>Memoria en uso: </h1>
+    <ul>
+        <li><b>RSS:</b> {{{data.memoriaEnUso.rss}}}</li>
+        <li><b>HeapTotal:</b> {{{data.memoriaEnUso.heapTotal}}}</li>
+        <li><b>HeapUsed:</b> {{{data.memoriaEnUso.heapUsed}}}</li>
+        <li><b>External:</b> {{{data.memoriaEnUso.external}}}</li>
+        <li><b>Array-Buffer:</b> {{{data.memoriaEnUso.arrayBuffers}}}</li>
+ 
+    </ul>
+
+</body>
+</html>

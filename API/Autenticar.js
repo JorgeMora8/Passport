@@ -3,8 +3,9 @@ import {ContendorUsuarios} from "../ContenedorMongoDB/DAOMongo.js";
 
 //=>Funcion para autenticar a los usuarios
 export async function autenticar(username, password){ 
-    let usuario; 
-    console.log(username, password)
+
+    let usuario;
+
     try {
         usuario = await ContendorUsuarios.obtenerUsuarioPorNombre(username); 
     } catch (error) {
@@ -12,7 +13,9 @@ export async function autenticar(username, password){
     }
 
     if(usuario.password !== password){ 
-        throw new Error("La contraseña no coincide")
+       throw new Error("La contraseña no coincide")
     }
+
     return usuario
+
 }

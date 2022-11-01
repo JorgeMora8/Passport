@@ -1,5 +1,9 @@
 import mongoose from "mongoose"; 
-const uri = "mongodb://localhost:27017"; 
+import { config } from "dotenv";
+config()
+
+// const uri = "mongodb://localhost:27017";
+const uri = process.env.MONGO_LINK 
 
 mongoose.connect(uri); 
 
@@ -24,10 +28,9 @@ export default class Contenedor{
 
       async obtenerUsuarioPorNombre(userName){ 
         try {
-          const usuario = await this.schema.findOne({username:userName}, {_id:0, __v:0})
-          
-          if(!usuario){ 
-            return null
+          const usuario = this.schema.findOne({username:userName}, {_id:0, __v:0}); 
+          if(usuario == null){ 
+            throw new Error
           }
           return usuario
         } catch (error) {
@@ -51,7 +54,7 @@ export default class Contenedor{
 
       async guardarUsuario(DatosUsuario){ 
         try {
-          await this.schema.create({username:DatosUsuario.username, password:DatosUsuario.password, id:DatosUsuario.password});
+          await this.schema.create({username:DatosUsuario.username, password:DatosUsuario.password, id:DatosUsuario.id});
         } catch (error) {
           console.log(error)
         }

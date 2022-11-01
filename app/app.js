@@ -1,5 +1,4 @@
 import express from "express"; 
-import productosRouter from "../router/Productos_test.js";
 import {engine} from "express-handlebars"; 
 import session from "express-session"; 
 import {configSession} from "../config/configDATA.js";
@@ -24,35 +23,4 @@ app.set("view engine", ".handlebars");
 app.set("views", "./views");
 
 
-app.use("/api/productosTest", productosRouter)
-
-
 export {app}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import http from "http"; 
-// import {Server} from "socket.io"; 
-// const httpServer = http.createServer(app); 
-// const io = new Server(httpServer);
-
-
-
-
-

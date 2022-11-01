@@ -28,7 +28,8 @@ function failLoginController(req, res) {
 }
 
 function logoutController(req, res){
-    const username = req.user.username; 
+    const username = req.user
+    console.log(username)
 
     if(req.isAuthenticated()) { 
         req.logout((err) => { 
