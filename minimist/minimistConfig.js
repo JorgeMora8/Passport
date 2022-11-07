@@ -1,6 +1,12 @@
 import parseArg from "minimist";
 
-const config = parseArg(process.argv.slice(2), {default:{p:8080}, alias:{p:"PORT"}} )
-const PORT = config.PORT; 
+const config = parseArg(process.argv.slice(2), {default:{p:8080, m:"fork"}, alias:{p:"PORT", m:"MODO"}}); 
 
-export { PORT }
+const PORT = config.PORT; 
+const MODO = config.MODO; 
+
+
+export { 
+    PORT, 
+    MODO    
+}

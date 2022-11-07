@@ -2,11 +2,8 @@ import mongoose from "mongoose";
 import { config } from "dotenv";
 config()
 
-// const uri = "mongodb://localhost:27017";
 const uri = process.env.MONGO_LINK 
-
 mongoose.connect(uri); 
-
 
 //=>Contenedor 
 export default class Contenedor{ 

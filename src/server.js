@@ -7,20 +7,6 @@ import {ClienteMysql} from "../ContenedorMYSQL/ClienteMysql.js";
 import {chatContenedor} from "../ContenedorMongoDB/DAOMongo.js";
 import {messageSchema} from "../normalizr/NormalizrSchema.js";
 
-//=>Importacion de modulo
-import { PORT } from "../minimist/minimistConfig.js";
-
-// const PORT = 5000;
-const httpServer = http.createServer(app);
-const io = new Server(httpServer);
-
-//=>Inicializacion de server
-const server = httpServer.listen(PORT, () => {
-  console.log("Usando el puerto: " + PORT);
-});
-server.on("error", (err) => {
-  console.log(err);
-});
 
 //=>Importacion de Routers
 import {AuthRouter} from "../router/authRouter.js"; 
@@ -34,12 +20,24 @@ import {router} from "../router/Productos_test.js"
 app.use("/auth", AuthRouter); 
 app.use("/info", infoRouter)
 app.use("/", HomeRoot)
-app.use("/random", RandomNumberRouter); 
+app.use("/api", RandomNumberRouter); 
 app.use("/productosFaker", router)
 
-//=>Chat Socket.Io
+
+//=>Funcion para levantar servidor [CLUSTER / FORK]
+//=>Dicha función se encuentra en la carpeta recurso/InicializacionServidor.js
+export default function crearServidor(port){ 
+  const httpServer = http.createServer(app); 
+  const server = httpServer.listen(port, ()=>{
+    console.log(`Servidor de express ${process.pid} esta ejecutandose en el puerto ${port}`); 
+  })
+
+  const io = new Server(httpServer);
+
+  //=>Chat Socket.Io
 io.on("connection", async (socket) => {
   socket.emit("productos", await ClienteMysql.ObtenerProductos());
+ 
   socket.emit(
     "chat",
     normalize(await chatContenedor.obtenerMensajes(), [messageSchema])
@@ -58,3 +56,8 @@ io.on("connection", async (socket) => {
     );
   });
 });
+
+server.on("error", (error)=>{
+  console.log(error); 
+})
+}

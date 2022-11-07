@@ -1,9 +1,9 @@
 //Instalacion de connect-mongo. Sesiones
 import MongoStore from "connect-mongo";
-import { config } from "dotenv"
+import { config } from "dotenv"; 
+import os from "os"
 config()
 
-// const MongoURL = "mongodb://localhost:27017"
 const MongoURL = process.env.MONGO_LINK
 const Store = MongoStore.create({mongoUrl: MongoURL, ttl:60})
 
@@ -13,7 +13,8 @@ const procesDATA = {
     directorio: process.cwd(), 
     tituloProceso : process.title, 
     memoriaEnUso: process.memoryUsage(), 
-    version:process.version
+    version:process.version, 
+    procesadores:os.cpus().length
 }
 
 const configSession = { 

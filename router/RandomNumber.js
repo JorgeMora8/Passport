@@ -4,6 +4,6 @@ import {requireAuthentication} from "../middleware/auth.js"
 
 const RandomNumberRouter = express.Router();
 
-RandomNumberRouter.get("/", requireAuthentication, randomNumberController)
+RandomNumberRouter.get("/random", requireAuthentication, randomNumberController)
 
 export { RandomNumberRouter }
