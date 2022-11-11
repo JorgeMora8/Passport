@@ -1,5 +1,7 @@
-import {Strategy} from "passport-local"
+import {Strategy} from "passport-local"; 
 
+
+import { loggerError, loggerInfo } from "../loggeo/loggeoConfig.js";
 import {autenticar} from "../API/Autenticar.js";
 import asegurarNombreUnico from "../API/Usuario.js"; 
 import {crearUsuario} from "../models/ModelUsuario.js"; 
@@ -16,27 +18,43 @@ export const registroLocal = new Strategy({
           const usuario = crearUsuario(req.body); 
           await ContendorUsuarios.guardarUsuario(usuario);  
           
+            loggerInfo.info(`Registro de nuevo usuario. ${usuario}`)
           done(null, usuario)
 
         } catch (error) {
-
+            loggerError.error(error)
             done(null, false, error)
 
         }
     }
 )
 
+// export const loginLocal = new Strategy(
+//     async (username, password, done) => { 
+//         try {
+
+//             const usuario = autenticar(username, password); 
+//             done(null, usuario)
+
+//         } catch (error) {
+
+//             done(null, false, error)
+
+//         }
+//     }
+// )
+
+
 export const loginLocal = new Strategy(
     async (username, password, done) => { 
         try {
-
-            const usuario = autenticar(username, password); 
+            const usuario = await autenticar(username, password); 
             done(null, usuario)
-
-        } catch (error) {
-
+        } 
+        catch (error) {
+            loggerError.error(error)
             done(null, false, error)
-
+            
         }
     }
 )

@@ -6,7 +6,10 @@ import { normalize } from "normalizr";
 import {ClienteMysql} from "../ContenedorMYSQL/ClienteMysql.js";
 import {chatContenedor} from "../ContenedorMongoDB/DAOMongo.js";
 import {messageSchema} from "../normalizr/NormalizrSchema.js";
+import {PORT} from "../minimist/minimistConfig.js"
 
+//=>Importacion de loggers; 
+import { loggerError, loggerInfo, loggerWarn } from "../loggeo/loggeoConfig.js";
 
 //=>Importacion de Routers
 import {AuthRouter} from "../router/authRouter.js"; 
@@ -21,7 +24,13 @@ app.use("/auth", AuthRouter);
 app.use("/info", infoRouter)
 app.use("/", HomeRoot)
 app.use("/api", RandomNumberRouter); 
-app.use("/productosFaker", router)
+app.use("/productosFaker", router); 
+
+app.get("*", (req, res) => {
+  loggerWarn.warn(`Pagina requerida no existe. [ http://localhost:${PORT}/${req.originalUrl} ]`)
+  res.status(200).send("Pagina requerida no existe"); 
+  
+})
 
 
 //=>Funcion para levantar servidor [CLUSTER / FORK]
@@ -45,11 +54,13 @@ io.on("connection", async (socket) => {
 
   socket.on("nuevoProducto", async (data) => {
     await ClienteMysql.Guardar(data);
+    loggerInfo.info(`Ingreso de nuevo producto. ${data} `)
     io.sockets.emit("productos", await ClienteMysql.ObtenerProductos());
   });
 
   socket.on("nuevoMensaje", async (data) => {
     await chatContenedor.guardarMensaje(data);
+    loggerInfo.info(`Ingreso de nuevo mensaje. ${data} `)
     io.sockets.emit(
       "chat",
       normalize(await chatContenedor.obtenerMensajes(), [messageSchema])
@@ -58,6 +69,6 @@ io.on("connection", async (socket) => {
 });
 
 server.on("error", (error)=>{
-  console.log(error); 
+  loggerError.error(error) 
 })
 }

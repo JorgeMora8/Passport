@@ -1,6 +1,6 @@
-import {getRandmonNumber} from "../recurso/getRandomNumber.js"
+import {getRandomNumber} from "../recurso/getRandomNumber.js"
 
-process.on("message", (data)=>{
-    let resultado = getRandmonNumber(data); 
+process.on("message", async (data)=>{
+    let resultado = await getRandomNumber(data); 
     process.send(resultado)
 })

@@ -1,0 +1,13 @@
+[2022-11-10T10:29:16.768] [ERROR] error - La contraseña no coincide
+[2022-11-10T10:30:09.221] [ERROR] error - La contraseña no coincide
+[2022-11-10T10:38:15.540] [ERROR] error - La contraseña no coincide
+[2022-11-10T10:45:22.638] [ERROR] error - Error: Nombre de usuario en uso. Agregar otro nombre...
+    at asegurarNombreUnico (file:///C:/Users/jorge/Desktop/BackEnd-Normalizr-main/API/Usuario.js:8:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Strategy._verify (file:///C:/Users/jorge/Desktop/BackEnd-Normalizr-main/middleware/passportStrategies.js:17:11)
+[2022-11-10T10:49:58.757] [ERROR] error - Error: Nombre de usuario en uso. Agregar otro nombre...
+    at asegurarNombreUnico (file:///C:/Users/jorge/Desktop/BackEnd-Normalizr-main/API/Usuario.js:8:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Strategy._verify (file:///C:/Users/jorge/Desktop/BackEnd-Normalizr-main/middleware/passportStrategies.js:17:11)
+[2022-11-10T10:50:10.371] [ERROR] error - La contraseña no coincide
+[2022-11-10T10:50:29.604] [ERROR] error - No se encontro ningun usuario

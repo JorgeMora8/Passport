@@ -23,13 +23,14 @@ const randomNumberController = (req, res) => {
     }
 
 
+    //=>Desactivado el child-process para calcular en dos instancias
 
-    const childProcess = fork("./API/randomNumberProcess.js"); 
-    childProcess.send(cantidadRandomNumber); 
+    // const childProcess = fork("./API/randomNumberProcess.js"); 
+    // childProcess.send(cantidadRandomNumber); 
 
-    childProcess.on("message", (data) => { 
-        res.send(data)
-    })
+    // childProcess.on("message", (data) => { 
+    //     res.send(data)
+    // })
     
  
  }
