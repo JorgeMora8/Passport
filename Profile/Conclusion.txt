@@ -1,0 +1,24 @@
+#Profile
+
+Profile nos permitió verificar el rendimiento del servidor teniendo una petición tipo GET hacia la 
+ruta: "http://localhost:8080/info". En donde una vez hecho las pruebas y arrojado los resultados 
+pertinentes, hemos llegado a la conclusión de que el hecho de incluir funciones de tipo bloqueantes 
+(en este caso el console.log() ) hizo que el rendimiento del servidor disminuyera en comparación 
+con la prueba posterior que se hizo sin la presencia del console.log() en el código. Se puede justificar 
+gracias al aumento considerable de ticks demostrado en los resultados adjuntados y el uso de más 
+recurso en comparación con la prueba sin funciones bloqueantes.
+
+Comandos Usados: 
+
+
+#Iniciando informe Profile
+node --prof recurso/InicializacionServidor.js 
+
+#Artillery
+artillery quick --count 50 -n 20 "http://localhost:8080/info" > result_Log.txt
+artillery quick --count 50 -n 20 "http://localhost:8080/info" > result_NoLog.txt
+
+#Autocannon
+node autoCannon/configAC.js
+
+
