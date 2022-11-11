@@ -20,6 +20,6 @@ function run(url) {
   })
 }
 
-console.log('Running all benchmarks in parallel ...')
+console.log('Corriendo autocannon')
 
 run('http://localhost:8080/info')
