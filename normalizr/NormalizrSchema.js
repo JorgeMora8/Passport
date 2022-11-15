@@ -1,5 +1,5 @@
 //=> Schemas
-import {schema, normalize} from "normalizr";
+import {schema} from "normalizr";
 
 
 const authorSchema = new schema.Entity("author", {idAttribute:"mail"})

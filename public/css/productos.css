@@ -12,6 +12,8 @@
     border-radius: 1rem;
 }
 
+
+
 .productoItem{ 
     width: 15rem;
     height: 15rem;
@@ -49,4 +51,8 @@
 
 .libreria{ 
     color: rgb(255, 100, 83);
+}
+
+.subtitulo { 
+    color: green;
 }

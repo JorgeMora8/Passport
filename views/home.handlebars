@@ -13,13 +13,17 @@
 <body>
 
 
-      <h1 class="titulo">bienvenido {{{nombre}}}</h1>
+      <h1 class="titulo">bienvenido {{{username}}}</h1>
       <div class="infoLogIn">
-         <h3 class="correoLogIn">Tu correo es: {{{email}}}</h3>
       <form action="/auth/logout" method="get" id="btnLogout">
-       <button type="submit" value="submit" class="btnLogOut">Desloguearse</button>
+      <h5 class="deslogueoInfo">En caso de querer cerrar la sesion, haz click en desloguearse<button type="submit" value="submit" class="btnLogOut" style="margin: 10px">Desloguearse</button></h5>
       </form> 
       </div>
+      <div class="navegacionArea">
+        <button class="btnProductoFaker"><a href="/productosFaker" style="color:#fff">Productos Faker</a></button>
+        <button class="btnInformacion"><a href="/info" style="color:#fff">Informacion</a></button>
+      </div>
+      
 
     <div class="formularioContainer">
         <form onsubmit="return agregarProducto(this)">
@@ -49,5 +53,8 @@
         </div>
 
         <div id="chatContenedor"></div>
+
+
+        <div>Navegacion</div>
 </body>
 </html>

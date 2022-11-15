@@ -29,22 +29,6 @@ export const registroLocal = new Strategy({
     }
 )
 
-// export const loginLocal = new Strategy(
-//     async (username, password, done) => { 
-//         try {
-
-//             const usuario = autenticar(username, password); 
-//             done(null, usuario)
-
-//         } catch (error) {
-
-//             done(null, false, error)
-
-//         }
-//     }
-// )
-
-
 export const loginLocal = new Strategy(
     async (username, password, done) => { 
         try {
@@ -55,7 +39,6 @@ export const loginLocal = new Strategy(
             loggerError.error(error)
             done(null, false, error)
             
-        }
-    }
+        }      }
 )
 

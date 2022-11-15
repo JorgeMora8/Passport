@@ -2,6 +2,8 @@
 
 
 const randomNumberController = (req, res) => {
+
+    
     let cantidadRandomNumber; 
 
     let keys = Object.keys(req.query)
@@ -22,15 +24,12 @@ const randomNumberController = (req, res) => {
 
     }
 
+    const childProcess = fork("./API/randomNumberProcess.js"); 
+    childProcess.send(cantidadRandomNumber); 
 
-    //=>Desactivado el child-process para calcular en dos instancias
-
-    // const childProcess = fork("./API/randomNumberProcess.js"); 
-    // childProcess.send(cantidadRandomNumber); 
-
-    // childProcess.on("message", (data) => { 
-    //     res.send(data)
-    // })
+    childProcess.on("message", (data) => { 
+        res.send(data)
+    })
     
  
  }

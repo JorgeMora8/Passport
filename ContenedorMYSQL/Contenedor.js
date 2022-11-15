@@ -53,5 +53,3 @@ export default class ContenedorMysql {
         this.knex.destroy();
       }
 }
-
-// module.exports = ContenedorMysql
