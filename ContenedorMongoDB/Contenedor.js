@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 import { config } from "dotenv";
 config()
 
-// const uri = process.env.MONGO_LINK 
-const uri = "mongodb+srv://jorgemora:jorgemora2002@coderhouse.vn6h1er.mongodb.net/?retryWrites=true&w=majority"
+const uri = process.env.URI
 mongoose.connect(uri); 
 
 //=>Contenedor 
