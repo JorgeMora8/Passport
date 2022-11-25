@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 import { config } from "dotenv";
 config()
 
-const uri = process.env.MONGO_LINK 
+// const uri = process.env.MONGO_LINK 
+const uri = "mongodb+srv://jorgemora:jorgemora2002@coderhouse.vn6h1er.mongodb.net/?retryWrites=true&w=majority"
 mongoose.connect(uri); 
 
 //=>Contenedor 
@@ -51,7 +52,7 @@ export default class Contenedor{
 
       async guardarUsuario(DatosUsuario){ 
         try {
-          await this.schema.create({username:DatosUsuario.username, password:DatosUsuario.password, id:DatosUsuario.id});
+          await this.schema.create({username:DatosUsuario.username, password:DatosUsuario.password, id:DatosUsuario.id, location:DatosUsuario.location, phoneNumber:DatosUsuario.phoneNumber, age:DatosUsuario.age, name:DatosUsuario.name});
         } catch (error) {
           console.log(error)
         }
@@ -65,6 +66,78 @@ export default class Contenedor{
         }
       }
 
+      async guardarProductoCarrito(producto){ 
+
+        const obj = producto[0]
+      
+
+        try {
+          return await this.schema.create({ id_producto: obj.id_producto, nombre: obj.nombre, precio: obj.precio, imagen:obj.imagen, tipo_producto: obj.tipo_producto})
+        } catch (error) {
+          throw new Error("Hubo un error en el proceso de insertar el producto: " + error)
+        }
+      }
+
+      async obtenerTodosProductosCarrito(){
+        try {
+          return await this.schema.find({}, { _id: 0, __v: 0 }).lean();
+        } catch (error) {
+          throw new Error("Hubo un error en el proceso de traer todos los usuarios: " + error)
+        }
+      }
+
+      async eliminarProductosCarrito(idObtenido){ 
+        try {
+          return await this.schema.deleteOne({id_producto: idObtenido})
+        } catch (error) {
+          throw new Error("Hubo un error en el proceso de traer todos los usuarios: " + error)
+        }
+      }
+
+      async limpiarCarrito(){
+        try {
+          return await this.schema.deleteMany({})
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
+
+      async obtenerPrecioTotal(){
+        let productosEnCarrito = await this.obtenerTodosProductosCarrito()
+
+        let total= 0
+    
+         productosEnCarrito.forEach((producto) => { 
+            let num = Number(producto.precio)
+            total += num
+        })
+
+
+        return total
+      }
+
+
+      //=>Nuevas functiones. Obtener/seleccionar/eliminar.
+      async obtenerProductos (){ 
+        try {
+          return await this.schema.find({}, { _id: 0, __v: 0 })
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
+      async obtenerProductoPorId(id){ 
+        try {
+          return await this.schema.find({id_producto: id}, {_id:0, __v:0})
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
+      async agregarProductoStock(producto, id){ 
+        return this.schema.create({id_producto: id, nombre: producto.nombre, precio:producto.precio, imagen:producto.imagen  ,tipo_producto: producto.tipo_producto})
+      }
 
     };
 

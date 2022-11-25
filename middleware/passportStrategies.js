@@ -6,6 +6,7 @@ import {autenticar} from "../API/Autenticar.js";
 import asegurarNombreUnico from "../API/Usuario.js"; 
 import {crearUsuario} from "../models/ModelUsuario.js"; 
 import {ContendorUsuarios} from "../ContenedorMongoDB/DAOMongo.js";
+import {enviarCorreoCompra} from "../twilio/Gmail.js"
 
 
 export const registroLocal = new Strategy({
@@ -19,6 +20,18 @@ export const registroLocal = new Strategy({
           await ContendorUsuarios.guardarUsuario(usuario);  
           
             loggerInfo.info(`Registro de nuevo usuario. ${usuario}`)
+
+       let plantillaMensaje = `
+           NUEVO REGISTRO \n
+           -Nombre: ${usuario.name},\n
+           -Edad: ${usuario.age},\n
+           -Correo: ${usuario.username}, \n
+           -Direccion: ${usuario.location}, \n  
+           -Telefono: ${usuario.phoneNumber}
+            
+       `
+
+            await enviarCorreoCompra("Nuevo Registro", plantillaMensaje)
           done(null, usuario)
 
         } catch (error) {

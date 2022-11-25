@@ -5,9 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./style.css">
+     <script src="https://kit.fontawesome.com/4834373349.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <div class="navBarContainer">
+    <b class="NavBarLogo">Tech-Store</b>
+    <ul class="navLinkList">
+      <li><a href="/productosFaker" >Productos Faker</a></li>
+      <li><a href="/carrito">carrito</a></li>
+      <li><a href="/">Home</a></li>
+      <form action="/auth/logout" method="get" id="btnLogout">
+      <button type="submit" value="submit" class="btnLogOut" style="margin: 10px"><i class="fa-solid fa-right-from-bracket"></i> Desloguearse</button>
+      </form> 
+    </ul>
+  </div>
 
      <div class="dataContenedor">
           <h1 class="tituloInfo">Memoria en uso: </h1>

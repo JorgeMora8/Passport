@@ -5,31 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../style.css">
+     <script src="/socket.io/socket.io.js"></script>
+    <script src="./carrito.js"></script>
+    <link rel="stylesheet" href="./style.css">
      <script src="https://kit.fontawesome.com/4834373349.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="navBarContainer">
+   
+ <div class="navBarContainer">
     <b class="NavBarLogo">Tech-Store</b>
     <ul class="navLinkList">
-      <li><a href="/info" >Info</a></li>
-      <li><a href="/carrito">carrito</a></li>
+      <li><a href="/productosFaker" >Productos Faker</a></li>
+      <li><a href="/info">Informacion</a></li>
       <li><a href="/">Home</a></li>
       <form action="/auth/logout" method="get" id="btnLogout">
       <button type="submit" value="submit" class="btnLogOut" style="margin: 10px"><i class="fa-solid fa-right-from-bracket"></i> Desloguearse</button>
       </form> 
     </ul>
   </div>
-    <h1 class="tituloPagina">Lista de productos Random <span class="libreria">(Faker.Js)</span></h1>
-    <div class="containerProductosFaker">
+
+    {{!-- <button onclick="carrito()">Mensaje a enviar al servidor</button> --}}
+
+    <div class="productoCarritoContenedor">
     {{#each productos}}
             <div class="productoItem">
             <h3 class="nombreProducto">{{nombre}}</h1>
             <h4 class="precioProducto">{{precio}}</h2>
             <img src={{imagen}} alt="imagen" width="200px">
+            <button value={{id_producto}} id="btnEliminarProductoCarrito" onclick="eliminarProducto(this.value)">Eliminar</button>
         </div>
     {{/each}}
-        </div>
-        
+
+    <b>{{precioTotal}}</b>
+    </div>
+    <button onclick="hacerCompra()">Comprar</button>
 </body>
 </html>

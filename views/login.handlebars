@@ -5,17 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-           <link rel="stylesheet" href="./css/style.css">
+           <link rel="stylesheet" href="../style.css">
+           <script src="https://kit.fontawesome.com/4834373349.js" crossorigin="anonymous"></script>
 </head>
 <body>
-   <h1 class="FormularioTitulo" style="color: #1e1e1e; font-size: 30px; font-family:poppins; marging:20px">Rellena el formulario para entrar en la pagina</h1>
-   <div class="formularioArea">
-    <form action="/auth/login" method="post" id="userSubmit">
-      <input type="email" class="input" name="username" placeholder="Ingrese su email" required style="padding: 8px; border-radius:10px"/>
-      <input type="password" class="input" name="password" placeholder="Ingrese su contraseña" required style="padding: 8px; border-radius:10px"/>
-      <button type="submit" value="submit" class="btnFormularioLogIn" style="padding: 10px; border-radius:10px; background-color:#571fff; color:#fff; border:none; cursor:pointer">Ingresar</button>
-      <button style="background-color:#661e8d; padding: 8px; border-radius:10px; border:none"><a href="/auth/register" style="color:#fff">Ir a registrarse</a></button>
+
+  <div class="navBarContainer">
+    <b class="NavBarLogo">Tech-Store</b>
+    <p ><a href="/auth/register" class="link"><i class="fa-solid fa-user"></i> Ir a registrarse</a></p>
+  </div>
+
+  <div class="ContainerArea">
+  <div class="areaFormularioContainer">
+
+    <form action="/auth/login" method="post" id="userSubmit" class="formularioContainer">
+    <b class="tituloFormulario">Ingrese sus datos para entrar a la pagin</b>
+      <input type="email" class="input" name="username" placeholder="Ingrese su email" required />
+      <input type="password" class="input" name="password" placeholder="Ingrese su contraseña" required />
+      <button type="submit" value="submit" class="btnRegistroFormulario" ><i class="fa-solid fa-door-open"></i>  Ingresar</button>
+      
     </form>
+    </div>
     </div>
 </body>
 </html>

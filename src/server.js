@@ -4,10 +4,13 @@ import http from "http";
 import { Server } from "socket.io";
 import { normalize } from "normalizr";
 import { ClienteMysql } from "../ContenedorMYSQL/ClienteMysql.js";
-// import { conection } from "../ContenedorMYSQL/ClienteMysql.js";
-// import { Options } from "../ContenedorMYSQL/Options/Options.js";
-import { chatContenedor } from "../ContenedorMongoDB/DAOMongo.js";
+import { chatContenedor, ContenedorProductos } from "../ContenedorMongoDB/DAOMongo.js";
 import { messageSchema } from "../normalizr/NormalizrSchema.js";
+import { enviarProductosCompra } from "../twilio/WhatsApp.js";
+import { enviarCorreoCompra } from "../twilio/Gmail.js";
+import { ContenedorCarrito } from "../ContenedorMongoDB/DAOMongo.js";
+import {renderizarProductos} from "../recurso/renderizarMensaje.js"; 
+import {obtenerId} from "../models/IdModel.js"
 
 //=>Importacion de loggers;
 import { loggerError, loggerInfo } from "../loggeo/loggeoConfig.js";
@@ -18,6 +21,8 @@ import { HomeRoot } from "../router/root.js";
 import { infoRouter } from "../router/infoRouter.js";
 import { RandomNumberRouter } from "../router/RandomNumber.js";
 import { router } from "../router/Productos_test.js";
+import { productosRouter } from "../router/productosRouter.js";
+import { carritoRouter } from "../router/carritoRouter.js";
 
 //=>Instalacion de Routers
 app.use("/auth", AuthRouter);
@@ -25,6 +30,8 @@ app.use("/info", infoRouter);
 app.use("/", HomeRoot);
 app.use("/api", RandomNumberRouter);
 app.use("/productosFaker", router);
+app.use("/tipoProductos", productosRouter);
+app.use("/carrito", carritoRouter);
 
 import { paginaNoEncontrada } from "../Controllers/paginaNoEncontrada.js";
 app.get("*", paginaNoEncontrada);
@@ -39,15 +46,18 @@ export default function crearServidor(port) {
     );
   });
 
- 
-
   const io = new Server(httpServer);
 
   //=>Chat Socket.Io
 
   io.on("connection", async (socket) => {
-  
-    socket.emit("productos", await ClienteMysql.ObtenerProductos());
+    // socket.emit("productos", await ClienteMysql.ObtenerProductos());
+     socket.emit("productos", await ContenedorProductos.obtenerProductos());
+
+    socket.emit(
+      "productosCarrito",
+      await ContenedorCarrito.obtenerTodosProductosCarrito()
+    );
 
     socket.emit(
       "chat",
@@ -55,9 +65,12 @@ export default function crearServidor(port) {
     );
 
     socket.on("nuevoProducto", async (data) => {
-      await ClienteMysql.Guardar(data);
-      loggerInfo.info(`Ingreso de nuevo producto. ${data} `);
-      io.sockets.emit("productos", await ClienteMysql.ObtenerProductos());
+
+     await ContenedorProductos.agregarProductoStock(data,obtenerId() ); 
+     loggerInfo.info(`Producto agregado: ${data.nombre}`)
+     io.sockets.emit("productos", await ContenedorProductos.obtenerProductos());
+
+
     });
 
     socket.on("nuevoMensaje", async (data) => {
@@ -67,6 +80,32 @@ export default function crearServidor(port) {
         "chat",
         normalize(await chatContenedor.obtenerMensajes(), [messageSchema])
       );
+    });
+
+    socket.on("idNuevoProductoCarrito", async (idProducto) => {
+
+      const productoEncontrado = await ContenedorProductos.obtenerProductoPorId(idProducto)
+
+      console.log(productoEncontrado)
+      await ContenedorCarrito.guardarProductoCarrito(productoEncontrado)
+      console.log("Producto agregado")
+    });
+
+    socket.on("ProdutoEliminarCarrito", async (data) => {
+      await ContenedorCarrito.eliminarProductosCarrito(data);
+    });
+
+    socket.on("compra", async (data) => {
+      let productosEnCarrito = await ContenedorCarrito.obtenerTodosProductosCarrito();
+      let precioCarritoTotal = await ContenedorCarrito.obtenerPrecioTotal();
+    
+    let mensaje = renderizarProductos(productosEnCarrito)
+
+
+      //=>Proceso de enviar informacion al cliente de productos comprado
+      await enviarCorreoCompra("Compra de productos", mensaje)
+      await enviarProductosCompra("+584149493680", mensaje, precioCarritoTotal)
+      await ContenedorCarrito.limpiarCarrito()
     });
   });
 

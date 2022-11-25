@@ -22,15 +22,15 @@ export default class ContenedorMysql {
     }
     
       Guardar(producto) {
-        return this.knex("productos").insert(producto);
+        return this.knex("articulos").insert(producto);
       }
     
       ObtenerProductos() {
-        return this.knex.select("*").from("productos");
+        return this.knex.select("*").from("articulos");
       }
     
-      ObtenerPorId(id) {
-        return this.knex("productos").select("*").where({ id }).first();
+      ObtenerPorId(idObtenido) {
+        return this.knex("articulos").select("*").where("id_producto", idObtenido).first();
       }
     
       EliminarPorId(id) {
@@ -40,13 +40,30 @@ export default class ContenedorMysql {
           return false;
         }
     
-        this.knex("productos").where("id", id).del();
+        this.knex("articulos").where("id_producto", id).del();
     
         return true;
       }
     
       ActualizarProducto(objeto, id) {
-        return this.knex("productos").where("id", id).update(objeto);
+        return this.knex("articulos").where("id_producto", id).update(objeto);
+      }
+
+      buscarProductosPorGrupo(tipo){ 
+        return this.knex("articulos").select("*").where("tipo_producto", tipo);
+      }
+
+
+      agregarProductosCarrito(datosProducto){ 
+        return this.knex("carrito").insert(datosProducto);
+      }
+
+      eliminarProductosCarrito(id) {
+        return this.knex("carrito").delete("*").where({"id_producto": id})
+      }
+      
+      productosEnCarrito(){ 
+        return this.knex.select("*").from("carrito");
       }
     
       close() {

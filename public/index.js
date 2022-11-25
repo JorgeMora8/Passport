@@ -26,6 +26,7 @@ const agregarProducto = () => {
         nombre:document.getElementById("nombre").value,
         precio:document.getElementById("precio").value, 
         imagen:document.getElementById("img").value, 
+        tipo_producto:document.getElementById("tipo_producto").value, 
     }
 
     socket.emit("nuevoProducto", producto); 
@@ -40,13 +41,19 @@ const renderizarProductos = (data) => {
             `
             <div class="productoItem">
                 <h3 class="nombreItem">${element.nombre}</h3>
-                <b class="precioItem">${element.precio}</b>
+                <b class="precioItem">${element.precio}$</b>
                 <img src="${element.imagen}" width="200px" class="imgItem"/>
+                <button value="${element.id_producto}" class="btnAgregarProducto" onClick="nuevoProducto(${element.id_producto})">Agregar</button>
             </div>
             `
         )}).join(" "); 
         document.getElementById("productosContenedor").innerHTML=html; 
 }
+
+function nuevoProducto(id){ 
+   socket.emit("idNuevoProductoCarrito", id)
+}
+
 
 //=>Logica Mensajes; 
 const agregarMensaje = () => { 
