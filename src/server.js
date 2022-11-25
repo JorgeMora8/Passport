@@ -3,8 +3,7 @@ import { app } from "../app/app.js";
 import http from "http";
 import { Server } from "socket.io";
 import { normalize } from "normalizr";
-import { ClienteMysql } from "../ContenedorMYSQL/ClienteMysql.js";
-import { chatContenedor, ContenedorProductos } from "../ContenedorMongoDB/DAOMongo.js";
+import { chatContenedor, ContendorUsuarios, ContenedorProductos } from "../ContenedorMongoDB/DAOMongo.js";
 import { messageSchema } from "../normalizr/NormalizrSchema.js";
 import { enviarProductosCompra } from "../twilio/WhatsApp.js";
 import { enviarCorreoCompra } from "../twilio/Gmail.js";
@@ -51,7 +50,6 @@ export default function crearServidor(port) {
   //=>Chat Socket.Io
 
   io.on("connection", async (socket) => {
-    // socket.emit("productos", await ClienteMysql.ObtenerProductos());
      socket.emit("productos", await ContenedorProductos.obtenerProductos());
 
     socket.emit(
@@ -101,10 +99,11 @@ export default function crearServidor(port) {
     
     let mensaje = renderizarProductos(productosEnCarrito)
 
+    let usuario = await ContendorUsuarios.obtenerUsuarioPorNombre(data); 
+   
 
-      //=>Proceso de enviar informacion al cliente de productos comprado
-      await enviarCorreoCompra("Compra de productos", mensaje)
-      await enviarProductosCompra("+584149493680", mensaje, precioCarritoTotal)
+      await enviarCorreoCompra("Compra de productos.", mensaje, usuario.username); 
+      await enviarProductosCompra(usuario.phoneNumber, mensaje, precioCarritoTotal)
       await ContenedorCarrito.limpiarCarrito()
     });
   });
@@ -113,3 +112,4 @@ export default function crearServidor(port) {
     loggerError.error(error);
   });
 }
+

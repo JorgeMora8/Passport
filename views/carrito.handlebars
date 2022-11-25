@@ -9,6 +9,7 @@
     <script src="./carrito.js"></script>
     <link rel="stylesheet" href="./style.css">
      <script src="https://kit.fontawesome.com/4834373349.js" crossorigin="anonymous"></script>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
    
@@ -26,7 +27,9 @@
 
     {{!-- <button onclick="carrito()">Mensaje a enviar al servidor</button> --}}
 
+ <h1>Productos en carrito</h1>
     <div class="productoCarritoContenedor">
+    
     {{#each productos}}
             <div class="productoItem">
             <h3 class="nombreProducto">{{nombre}}</h1>
@@ -36,8 +39,8 @@
         </div>
     {{/each}}
 
-    <b>{{precioTotal}}</b>
+    <b class="cantidadPagar">Precio Total: <span class="cantidad">{{precioTotal}}$</span></b>
     </div>
-    <button onclick="hacerCompra()">Comprar</button>
+    <button onclick="hacerCompra(this.value)" value={{user}}>Comprar</button>
 </body>
 </html>

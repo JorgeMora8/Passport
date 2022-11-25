@@ -50,9 +50,9 @@ export default class Contenedor{
         }
       }
 
-      async guardarUsuario(DatosUsuario){ 
+      async guardarUsuario(DatosUsuario, password){ 
         try {
-          await this.schema.create({username:DatosUsuario.username, password:DatosUsuario.password, id:DatosUsuario.id, location:DatosUsuario.location, phoneNumber:DatosUsuario.phoneNumber, age:DatosUsuario.age, name:DatosUsuario.name});
+          await this.schema.create({username:DatosUsuario.username, password:password, id:DatosUsuario.id, location:DatosUsuario.location, phoneNumber:DatosUsuario.phoneNumber, age:DatosUsuario.age, name:DatosUsuario.name});
         } catch (error) {
           console.log(error)
         }

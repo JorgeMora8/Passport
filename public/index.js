@@ -51,6 +51,13 @@ const renderizarProductos = (data) => {
 }
 
 function nuevoProducto(id){ 
+    Swal.fire({
+        icon: 'success',
+        title: 'Producto agregado',
+        text: 'Acabo de agregar un producto al carrito',
+        footer: '<a href="/carrito">Ir a ver carrito'
+      })
+
    socket.emit("idNuevoProductoCarrito", id)
 }
 

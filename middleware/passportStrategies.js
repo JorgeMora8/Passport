@@ -6,7 +6,9 @@ import {autenticar} from "../API/Autenticar.js";
 import asegurarNombreUnico from "../API/Usuario.js"; 
 import {crearUsuario} from "../models/ModelUsuario.js"; 
 import {ContendorUsuarios} from "../ContenedorMongoDB/DAOMongo.js";
-import {enviarCorreoCompra} from "../twilio/Gmail.js"
+import {enviarCorreoCompra} from "../twilio/Gmail.js"; 
+import {hash} from "../recurso/hashPassword.js"
+import { plantilla } from "../recurso/plantillaMensaje.js";
 
 
 export const registroLocal = new Strategy({
@@ -17,21 +19,24 @@ export const registroLocal = new Strategy({
 
           await asegurarNombreUnico(username); 
           const usuario = crearUsuario(req.body); 
-          await ContendorUsuarios.guardarUsuario(usuario);  
+          let hashPassword = await hash(usuario.password)
+          await ContendorUsuarios.guardarUsuario(usuario, hashPassword);  
           
             loggerInfo.info(`Registro de nuevo usuario. ${usuario}`)
 
-       let plantillaMensaje = `
-           NUEVO REGISTRO \n
-           -Nombre: ${usuario.name},\n
-           -Edad: ${usuario.age},\n
-           -Correo: ${usuario.username}, \n
-           -Direccion: ${usuario.location}, \n  
-           -Telefono: ${usuario.phoneNumber}
+    //    let plantillaMensaje = `
+    //        NUEVO REGISTRO \n
+    //        -Nombre: ${usuario.name},\n
+    //        -Edad: ${usuario.age},\n
+    //        -Correo: ${usuario.username}, \n
+    //        -Direccion: ${usuario.location}, \n  
+    //        -Telefono: ${usuario.phoneNumber}
             
-       `
+    //    `
+   
+   let plantillaMensaje = plantilla(usuario.name, usuario.age, usuario.username, usuario.location, usuario.phoneNumber)
 
-            await enviarCorreoCompra("Nuevo Registro", plantillaMensaje)
+            await enviarCorreoCompra("Nuevo Registro", plantillaMensaje, usuario.username)
           done(null, usuario)
 
         } catch (error) {
