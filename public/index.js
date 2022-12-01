@@ -23,10 +23,10 @@ const limpiezaChat = () => {
 //=>Enviar productos al contenedor
 const agregarProducto = () => { 
     const producto = { 
-        nombre:document.getElementById("nombre").value,
-        precio:document.getElementById("precio").value, 
-        imagen:document.getElementById("img").value, 
-        tipo_producto:document.getElementById("tipo_producto").value, 
+        name:document.getElementById("nombre").value,
+        price:document.getElementById("precio").value, 
+        image:document.getElementById("img").value, 
+        type_of_product:document.getElementById("tipo_producto").value, 
     }
 
     socket.emit("nuevoProducto", producto); 
@@ -36,14 +36,14 @@ const agregarProducto = () => {
 
 //=>Renderiza los productos del contenedor
 const renderizarProductos = (data) => { 
-    const html = data.map((element, idx) => { 
+    const html = data.map(({name, price, image, id}, idx) => { 
         return(
             `
             <div class="productoItem">
-                <h3 class="nombreItem">${element.nombre}</h3>
-                <b class="precioItem">${element.precio}$</b>
-                <img src="${element.imagen}" width="200px" class="imgItem"/>
-                <button value="${element.id_producto}" class="btnAgregarProducto" onClick="nuevoProducto(${element.id_producto})">Agregar</button>
+                <h3 class="nombreItem">${name}</h3>
+                <b class="precioItem">${price}$</b>
+                <img src="${image}" width="200px" class="imgItem"/>
+                <button value="${id}" class="btnAgregarProducto" onClick="nuevoProducto(${id})">Agregar</button>
             </div>
             `
         )}).join(" "); 
@@ -57,6 +57,7 @@ function nuevoProducto(id){
         text: 'Acabo de agregar un producto al carrito',
         footer: '<a href="/carrito">Ir a ver carrito'
       })
+      console.log(id)
 
    socket.emit("idNuevoProductoCarrito", id)
 }
@@ -67,15 +68,13 @@ const agregarMensaje = () => {
 
    //=>Estructurando el mensaje; 
     const mensaje = { 
-        author: { 
-            nombre:document.getElementById("nombreMensaje").value,
-            apellido:document.getElementById("apellidoMensaje").value,
-            edad:document.getElementById("edadMensaje").value,
+            name:document.getElementById("nombreMensaje").value,
+            lastName:document.getElementById("apellidoMensaje").value,
+            age:document.getElementById("edadMensaje").value,
             mail:document.getElementById("mailMensaje").value,
-            alias:document.getElementById("aliasMensaje").value,
+            nickNames:document.getElementById("aliasMensaje").value,
             avatar:document.getElementById("avatarMensaje").value,
-        }, 
-        message : document.getElementById("mensaje").value
+            message : document.getElementById("mensaje").value
     }
             socket.emit("nuevoMensaje", mensaje)
             // console.log(mensaje)
@@ -87,25 +86,18 @@ const agregarMensaje = () => {
 
 const renderizarChat = (data) => { 
 
-//=> Schemas
-const authorSchema = new normalizr.schema.Entity("author")
-const messageSchema = new normalizr.schema.Entity("mensaje", {
-    author: authorSchema}); 
-
-const messages = normalizr.denormalize(data.result, [messageSchema], data.entities)
-
-
-    const html = messages.map((element, idx) => { 
+    const html = data.map(({name, mail, message}, idx) => { 
         return (
             `<div class="mensajeItem">
-            <h1 class="contenidoMensaje">Nombre: ${element.author[0]}</h1>
-            <h2 class="contenidoMensaje">Apellido: ${element.author[1]}</h2>
-            <h3 class="contenidoMensaje">Correo: ${element.author[3]}</h3>
-            <p class="mensaje">${element.message}</p>
+            <h1 class="contenidoMensaje">Nombre: ${name}</h1>
+            <h2 class="contenidoMensaje">Apellido: ${mail}</h2>
+            <p class="mensaje">${message}</p>
             </div>`
         )
     }).join(" "); 
     document.getElementById("chatContenedor").innerHTML = html; 
+
+    console.log(data)
 } 
 
 socket.on("productos", (data) => {

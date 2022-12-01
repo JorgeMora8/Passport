@@ -25,22 +25,20 @@
     </ul>
   </div>
 
-    {{!-- <button onclick="carrito()">Mensaje a enviar al servidor</button> --}}
-
  <h1>Productos en carrito</h1>
     <div class="productoCarritoContenedor">
     
     {{#each productos}}
             <div class="productoItem">
-            <h3 class="nombreProducto">{{nombre}}</h1>
-            <h4 class="precioProducto">{{precio}}</h2>
-            <img src={{imagen}} alt="imagen" width="200px">
-            <button value={{id_producto}} id="btnEliminarProductoCarrito" onclick="eliminarProducto(this.value)">Eliminar</button>
+            <h3 class="nombreProducto">{{name}}</h1>
+            <h4 class="precioProducto">{{price}}</h2>
+            <img src={{image}} alt="imagen" width="200px">
+            <button value={{id}} id="btnEliminarProductoCarrito" onclick="eliminarProducto(this.value)">Eliminar</button>
         </div>
     {{/each}}
 
     <b class="cantidadPagar">Precio Total: <span class="cantidad">{{precioTotal}}$</span></b>
+    <button onclick="hacerCompra(this.value)" value={{user}} class="btnComprarCarritos">Comprar</button>
     </div>
-    <button onclick="hacerCompra(this.value)" value={{user}}>Comprar</button>
 </body>
 </html>
