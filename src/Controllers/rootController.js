@@ -1,4 +1,4 @@
-import { loggerInfo } from "../../test/loggeo/loggeoConfig.js"; 
+import { loggerInfo } from "../test/loggeo/loggeoConfig.js"; 
 import { ContendorUsuarios } from "../ContenedorMongoDB/DAOMongo.js";
 
 const getHome = async (req, res) => { 

@@ -1,8 +1,8 @@
 //=> Modo que sera inicializado el servidor. [CLUSTER O FORK]; 
 
 import cluster from "cluster"; 
-import crearServidor from "./servidor/server.js";
-import {MODO, PORT} from "./servidor/minimist/minimistConfig.js"
+import crearServidor from "./src/servidor/server.js";
+import {MODO, PORT} from "./src/Configuration/minimistConfig.js"
 
 import os from "os"; 
 const numCPUs = os.cpus().length; 

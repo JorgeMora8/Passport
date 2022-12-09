@@ -5,11 +5,13 @@ import { Server } from "socket.io";
 
 //=>Importacion de loggers;
 import { loggerError } from "../test/loggeo/loggeoConfig.js";
-import { generarCompra } from "../src/socketController/SC_compraController.js";
+import { generarCompra } from "../socketController/SC_compraController.js";
 
-import {Carrito} from "../src/socketController/SC_carritoController.js"
-import { chat } from "../src/socketController/SC_chatController.js";
-import { productos } from "../src/socketController/SC_productosController.js";
+import {Carrito} from "../socketController/SC_carritoController.js"
+import { chat } from "../socketController/SC_chatController.js";
+import { productos } from "../socketController/SC_productosController.js";
+
+import {ProdServicio} from "../ArquitecturaPersistencia/Productos/pruebaProductos.js"
 
 const negocioCarrito = new Carrito()
 const negocioChat = new chat();
@@ -29,16 +31,23 @@ export default function crearServidor(port) {
 
 io.on("connection", async (socket) => {
      
-    socket.emit("productos", await negocioProductos.obtenerProductos());
+    socket.emit("productos", await ProdServicio.obtenerProductos());
     socket.emit("productosCarrito", await negocioCarrito.obtenerProductosCarrito());
     socket.emit("chat",  await negocioChat.obtenerMensajes());
 
+    // socket.on("nuevoProducto", async (data) => {
+    //    await negocioProductos.agregarProducto(data)
+    //    io.
+    //    sockets.
+    //    emit("productos", await negocioProductos.obtenerProductos())
+    //   });
+
     socket.on("nuevoProducto", async (data) => {
-       await negocioProductos.agregarProducto(data)
-       io.
-       sockets.
-       emit("productos", await negocioProductos.obtenerProductos())
-      });
+      await ProdServicio.guardarProducto(data)
+      io.
+      sockets.
+      emit("productos", await negocioProductos.obtenerProductos())
+     });
 
     socket.on("nuevoMensaje", async (data) => {
      await negocioChat.guardarMensaje(data)

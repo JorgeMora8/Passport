@@ -1,8 +1,8 @@
 import express from "express"; 
 import {engine} from "express-handlebars"; 
 import session from "express-session"; 
-import {configSession} from "../configDATA.js";
-import {passportMiddleware, passportSessionHanlder} from "../src/middleware/passport.js";
+import {configSession} from "../Configuration/configDATA.js";
+import {passportMiddleware, passportSessionHanlder} from "../middleware/passport.js";
 
 
 const app = express(); 
@@ -23,13 +23,13 @@ app.set("view engine", ".handlebars");
 app.set("views", "./views");
 
 //=>Importacion de Routers
-import { AuthRouter } from "../src/router/authRouter.js";
-import { HomeRoot } from "../src/router/root.js";
-import { infoRouter } from "../src/router/infoRouter.js";
-import { RandomNumberRouter } from "../src/router/RandomNumber.js";
-import { router } from "../src/router/Productos_test.js";
-import { carritoRouter } from "../src/router/carritoRouter.js";
-import { paginaNoEncontrada } from "../src/Controllers/paginaNoEncontrada.js";
+import { AuthRouter } from "../router/authRouter.js";
+import { HomeRoot } from "../router/root.js";
+import { infoRouter } from "../router/infoRouter.js";
+import { RandomNumberRouter } from "../router/RandomNumber.js";
+import { router } from "../router/Productos_test.js";
+import { carritoRouter } from "../router/carritoRouter.js";
+import { paginaNoEncontrada } from "../Controllers/paginaNoEncontrada.js";
 
 //=>Instalacion de Routers
 app.use("/auth", AuthRouter);

@@ -1,4 +1,4 @@
-import { loggerInfo } from "../../test/loggeo/loggeoConfig.js";
+import { loggerInfo } from "../test/loggeo/loggeoConfig.js";
 import { agregarProductosFaker } from "../recurso/ProductosFaker/ProductosFaker.js";
 
 

@@ -1,6 +1,6 @@
 import {Strategy} from "passport-local"; 
 
-import { loggerError, loggerInfo } from "../../test/loggeo/loggeoConfig.js";
+import { loggerError, loggerInfo } from "../test/loggeo/loggeoConfig.js";
 import {autenticar} from "../API/Autenticar.js";
 import asegurarNombreUnico from "../API/Usuario.js"; 
 import {crearUsuario} from "../recurso/models/ModelUsuario.js"; 

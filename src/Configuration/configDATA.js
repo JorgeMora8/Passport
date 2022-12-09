@@ -4,7 +4,7 @@ import { config } from "dotenv";
 import os from "os"
 config()
 
-const MongoURL = process.env.URI
+const MongoURL = process.env.DB_MONGO_LINK
 const Store = MongoStore.create({mongoUrl: MongoURL, ttl:60})
 
 const procesDATA = { 
@@ -24,7 +24,12 @@ const configSession = {
     secret:"Programacion"
 }
 
-
+//Envioremnt Variables
+const mongoLink = process.env.DB_MONGO_LINK
+const transporterUser = process.env.TRANSPORTER_USER
+const transporterPass = process.env.TRANSPORTER_PASS
+const accountSID = process.env.accountSid
+const authToken = process.env.authToken
 
 
 export { 

@@ -1,4 +1,5 @@
-import {enviarCorreoCompra} from "../recurso/twilio/Gmail.js"
+import {enviarCorreoCompra} from "../recurso/twilio/Gmail.js"; 
+import {administratorGMAIL} from "../Configuration/EnviromentVariables.js"
 import {config} from "dotenv"; 
 config()
 
@@ -11,5 +12,5 @@ export async function plantilla({name, age, username, location, phoneNumber}){
     -Direccion: ${location}, \n  
     -Telefono: ${phoneNumber}  
 ` 
-await enviarCorreoCompra("Nuevo registro", cuerpoMensaje, process.env.ADMINISTRATOR_GMAIL )
+await enviarCorreoCompra("Nuevo registro", cuerpoMensaje, administratorGMAIL )
 }

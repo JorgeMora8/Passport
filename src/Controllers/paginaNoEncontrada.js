@@ -1,4 +1,4 @@
-import { loggerWarn } from "../../test/loggeo/loggeoConfig.js"
+import { loggerWarn } from "../test/loggeo/loggeoConfig.js"
 
 const paginaNoEncontrada = (req, res) => {
     loggerWarn.warn("Pagina no encontrada"); 

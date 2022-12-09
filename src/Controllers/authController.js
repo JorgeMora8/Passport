@@ -1,6 +1,6 @@
 import passport from "passport"; 
-import {loggerInfo, loggerError} from "../../test/loggeo/loggeoConfig.js"
-import { PORT } from "../../servidor/minimist/minimistConfig.js";
+import {loggerInfo, loggerError} from "../test/loggeo/loggeoConfig.js"
+import { PORT } from "../Configuration/minimistConfig.js";
 
 const registroController = passport.authenticate("registro", { 
     successRedirect:"/auth/successRegister", 

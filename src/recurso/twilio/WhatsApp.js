@@ -1,13 +1,12 @@
 import twilio from "twilio";
-import {config} from "dotenv"
-config()
+import {accountSID, authToken} from "../../Configuration/EnviromentVariables.js"
+// import {config} from "dotenv"
+// config()
 
+// const accountSid = process.env.accountSid
+// const authToken = process.env.authToken
 
-
-const accountSid = process.env.accountSid
-const authToken = process.env.authToken
-
-const client = twilio(accountSid, authToken); 
+const client = twilio(accountSID, authToken); 
 
 export async function enviarProductosCompra (numeroTelefono, listaProductos, precioTotal){ 
 

@@ -1,12 +1,13 @@
 import mongoose from "mongoose"; 
+import {mongoLink} from "../Configuration/EnviromentVariables.js"
 import { config } from "dotenv";
 config()
 
-const uri = process.env.URI
+// const uri = process.env.URI
 try {
-  await mongoose.connect(uri);  
+  await mongoose.connect(mongoLink);  
 } catch (error) {
-  console.log("Hubo un error en la conexion de codigo")
+  console.log("Hubo un error en la conexion de codigo. " + error)
 }
 
 //=>Contenedor 
@@ -54,10 +55,11 @@ export default class Contenedor{
 
      async guardar(datos){ 
       try {
-        await  await this.schema.create(datos);
+          await this.schema.create(datos);
       } catch (error) {
         console.log(error)
       }
+      // console.log(datos, "contenedo")
      }
 
     async guardarMensaje(objeto) {
