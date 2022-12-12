@@ -36,17 +36,3 @@ export default class Usuario {
     }
 }
 
-//Funciona; 
-// const datosUsuario1 = { 
-//     name:"Jorge Mora", 
-//     username:"jorgeandresmm2002@gmail.com", 
-//     id:123, 
-//     location:"Venezuela", 
-//     password:"jorgemora2002", 
-//     age: 20, 
-//     phoneNumber:"04144261314"
-// }
-
-// const usuario1 = new Usuario (datosUsuario1); 
-
-// console.log(usuario1)
