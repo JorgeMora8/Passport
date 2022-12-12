@@ -1,7 +1,7 @@
 import Producto from "./Productos.js"; 
-import { ContenedorProductos} from "../../ContenedorMongoDB/DAOMongo.js";
+import { ContenedorProductos} from "../../Contenedores/DAO.js";
 import {RepositorioProductos} from "./RepositorioProductos.js"
-import {randomUUID} from "crypto"
+import { obtenerId } from "../../recurso/models/IdModel.js";
 
 
 
@@ -11,7 +11,6 @@ export default class ServicioProductos {
     }
 
     async guardarProducto(datosProducto){ 
-        // console.log(datosProducto)
 
         const producto = 
             new Producto({
@@ -19,7 +18,10 @@ export default class ServicioProductos {
                 price : datosProducto.price, 
                 image : datosProducto.image, 
                 type_of_product : datosProducto.type_of_product, 
-                id: randomUUID()}); 
+                id: obtenerId(), 
+                brand: datosProducto.brand    
+            })
+       
 
         await this.RepositorioProductos.guardar(producto); 
         return producto; 
@@ -29,5 +31,10 @@ export default class ServicioProductos {
     async obtenerProductos(){ 
         const productosGuardados = await this.RepositorioProductos.obtener(); 
         return productosGuardados.map(prod => prod.asDTO());
+    }
+
+    async obtenerProductoPorId(id){ 
+        const productoGuardado = await this.RepositorioProductos.obtenerPorId(id); 
+        return productoGuardado.map(prod => prod.asDTO());
     }
 }

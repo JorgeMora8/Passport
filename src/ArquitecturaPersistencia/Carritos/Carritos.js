@@ -1,12 +1,4 @@
-import {
-    ValidarImagen, 
-    validarPrecio, 
-    validarTipoProducto, 
-    validarNombreProducto, 
-     
-     } from "./ValidacionesProductos.js"
-
-export default class Producto { 
+export default class Carrito { 
     
     //=>Declaring private variables; 
     #name
@@ -22,7 +14,7 @@ export default class Producto {
     this.#price = price; 
     this.#image = image; 
     this.#type_of_product = type_of_product; 
-    this.#id = id; 
+    this.#id = id
     this.#brand = brand
     }
 
@@ -34,7 +26,7 @@ export default class Producto {
             image: this.#image, 
             type_of_product : this.#type_of_product, 
             id: this.#id, 
-            brand: this.#brand
+            brand : this.#brand
         })
        
     }

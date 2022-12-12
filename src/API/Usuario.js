@@ -1,4 +1,4 @@
-import {ContendorUsuarios} from "../ContenedorMongoDB/DAOMongo.js"; 
+import {ContendorUsuarios} from "../Contenedores/DAO.js"; 
 
 
 //=>Funcion para asegurar un nombre unico para cada usuario

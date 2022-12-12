@@ -1,5 +1,5 @@
-import { ContenedorCarrito } from "../ContenedorMongoDB/DAOMongo.js";
-import { ContendorUsuarios } from "../ContenedorMongoDB/DAOMongo.js";
+import { ContenedorCarrito } from "../Contenedores/DAO.js";
+import { ContendorUsuarios } from "../Contenedores/DAO.js";
 import { renderizarProductos } from "../recurso/renderizarMensaje.js";
 import { enviarCorreoCompra } from "../recurso/twilio/Gmail.js";
 import { enviarProductosCompra } from "../recurso/twilio/WhatsApp.js";

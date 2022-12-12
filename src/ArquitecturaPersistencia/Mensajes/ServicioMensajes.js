@@ -1,7 +1,8 @@
 import Mensaje from "./Mensajes.js"; 
-import { chatContenedor} from "../../ContenedorMongoDB/DAOMongo.js";
+import { chatContenedor} from "../../Contenedores/DAO.js";
 import {RepositorioMensajes} from "./RepositorioMensajes.js"
 import {randomUUID} from "crypto"
+import { obtenerId } from "../../recurso/models/IdModel.js";
 
 
 
@@ -19,7 +20,7 @@ export default class ServicioMensajes {
                 nickName : datosMensajes.nickName, 
                 mail : datosMensajes.mail, 
                 message : datosMensajes.message, 
-                id: randomUUID()}); 
+                id: obtenerId()}); 
 
         await this.RepositorioMensajes.guardar(mensaje); 
         return mensaje;

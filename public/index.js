@@ -27,6 +27,7 @@ const agregarProducto = () => {
         price:document.getElementById("precio").value, 
         image:document.getElementById("img").value, 
         type_of_product:document.getElementById("tipo_producto").value, 
+        brand: document.getElementById("marca_producto").value
     }
 
     socket.emit("nuevoProducto", producto); 
@@ -57,9 +58,9 @@ function nuevoProducto(id){
         text: 'Acabo de agregar un producto al carrito',
         footer: '<a href="/carrito">Ir a ver carrito'
       })
-      console.log(id)
 
    socket.emit("idNuevoProductoCarrito", id)
+
 }
 
 
@@ -82,7 +83,19 @@ const agregarMensaje = () => {
         return false
 }
 
+//=>Filtrado
+const filtradoProductos = (data) => { 
+    console.log("Filtrado de productos")
+    let marcaSeleccionada = document.getElementById("selectMarca").value
+    let precioSeleccinado = document.getElementById("selectPrecio").value
+    let productoSeleccionado = document.getElementById("selectProducto").value
+    console.log(data)
 
+    console.log(marcaSeleccionada, precioSeleccinado, productoSeleccionado)
+
+    return false
+
+}
 
 const renderizarChat = (data) => { 
 

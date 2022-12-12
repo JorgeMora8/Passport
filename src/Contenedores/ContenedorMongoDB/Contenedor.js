@@ -1,5 +1,5 @@
 import mongoose from "mongoose"; 
-import {mongoLink} from "../Configuration/EnviromentVariables.js"
+import {mongoLink} from "../../Configuration/EnviromentVariables.js"
 import { config } from "dotenv";
 config()
 
@@ -35,7 +35,6 @@ export default class Contenedor{
     async obtenerPorId(Id){
       try {
         const item = await this.schema.findOne({id:Id}, {_id:0, __v:0}); 
-        console.log(item)
         if(item == null){ 
           throw new Error
         }
@@ -54,12 +53,13 @@ export default class Contenedor{
      }
 
      async guardar(datos){ 
+      console.log(datos, "contenedor")
       try {
           await this.schema.create(datos);
       } catch (error) {
         console.log(error)
       }
-      // console.log(datos, "contenedo")
+      console.log(datos, "contenedo")
      }
 
     async guardarMensaje(objeto) {
@@ -96,24 +96,3 @@ export default class Contenedor{
       }
 
     };
-
-
-
-
-
-
-
-
-
-          // async obtenerUsuarioPorId(idUsuario){ 
-      //   try {
-      //    let usuario = await this.schema.findOne({id:idUsuario}, {_id:0, __v:0}); 
-      //     if(!usuario){ 
-      //       throw new Error("No se consiguio usuario en metodo [obtenerusuarioporid]")
-      //     }
-      //     console.log(usuario)
-      //     return usuario
-      //   } catch (error) {
-      //     console.log(error)
-      //   }
-      // }

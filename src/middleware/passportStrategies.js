@@ -4,7 +4,7 @@ import { loggerError, loggerInfo } from "../test/loggeo/loggeoConfig.js";
 import {autenticar} from "../API/Autenticar.js";
 import asegurarNombreUnico from "../API/Usuario.js"; 
 import {crearUsuario} from "../recurso/models/ModelUsuario.js"; 
-import {ContendorUsuarios} from "../ContenedorMongoDB/DAOMongo.js";
+import {ContendorUsuarios} from "../Contenedores/DAO.js";
 import { plantilla } from "../recurso/plantillaMensaje.js";
 
 

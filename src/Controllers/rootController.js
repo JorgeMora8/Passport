@@ -1,5 +1,5 @@
 import { loggerInfo } from "../test/loggeo/loggeoConfig.js"; 
-import { ContendorUsuarios } from "../ContenedorMongoDB/DAOMongo.js";
+import { ContendorUsuarios } from "../Contenedores/DAO.js";
 
 const getHome = async (req, res) => { 
     loggerInfo.info("Rederizado de pagina Home"); 

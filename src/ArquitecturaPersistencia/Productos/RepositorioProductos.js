@@ -15,4 +15,9 @@ export class RepositorioProductos {
         let datosProductosGuardados = await this.dao.obtenerTodos(); 
         return datosProductosGuardados.map(prodGuardado => new Producto(prodGuardado))
     }
+
+    async obtenerPorId(idObtenido) { 
+        let productoObtenido = await this.dao.obtenerPorId(idObtenido); 
+        return new Producto(productoObtenido); 
+    }
 }

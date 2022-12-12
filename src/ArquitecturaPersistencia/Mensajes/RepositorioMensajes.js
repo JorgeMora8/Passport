@@ -1,4 +1,4 @@
-// import Producto from "./Productos.js";
+import Mensajes from "./Mensajes.js";
 
 export class RepositorioMensajes { 
     constructor(dao){ 
@@ -9,11 +9,10 @@ export class RepositorioMensajes {
         let datosMensaje = mensaje.asDTO(); 
         await this.dao.guardar(datosMensaje);
         return datosMensaje
-        // console.log(mensaje.asDTO(), "repo")
     }
 
     async obtener(){ 
         let datosMensajesGuardados = await this.dao.obtenerTodos(); 
-        return datosMensajesGuardados.map(MensGuardado => new Producto(MensGuardado))
+        return datosMensajesGuardados.map(MensGuardado => new Mensajes(MensGuardado))
     }
 }

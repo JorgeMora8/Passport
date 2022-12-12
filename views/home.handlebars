@@ -56,6 +56,7 @@
             <input type="text" id="precio" placeholder="Precio del producto..." class="input">
             <input type="text" id="img" placeholder="Imagen del producto..." class="input">
             <input type="text" id="tipo_producto" placeholder="Tipo de producto" class="input">
+            <input type="text" id="marca_producto" placeholder="Marca de producto... " class="input">
             <input type="submit" class="btn">
              {{!-- <buttton type="submit" class="btn"><i class="fa-solid fa-cart-plus"></i>  Agregar </buttton> --}}
         </form>
@@ -88,6 +89,71 @@
       <p class="textItem">Gran variedad de productos de todo tipo</p>
     </div>
    
+  </div>
+
+  {{!-- <div class="AreaFiltradoContainer"> --}}
+    {{!-- <div class="AreaFiltrado">
+        <div>
+          <input type="text">
+         </div>
+              <div>
+          <input type="text">
+         </div>
+           <div>
+          <input type="text">
+         </div>
+                    <div>
+          <input type="text">
+         </div>
+          <div>
+            <button class="btnBuscarFiltrado">Buscar</button>
+          </div>
+    </div> --}}
+
+    <form onsubmit="return filtradoProductos(this)" class="AreaFiltradoContainer">
+      <div class="ItemOpcionFiltrado">
+    <select name="" id="selectMarca" class="item">
+      <option value="none">Marca</option>
+       <option value="Apple">Apple</option>
+        <option value="Samsung">Samsung</option>
+         <option value="Dell">Dell</option>
+          <option value="Sony">Sony</option>
+           <option value="Microsoft">Microsoft</option>
+            <option value="Canon">Canon</option>
+             <option value="Xiaomi">Xiaomi</option>
+              <option value="Tp-Link">Tp-Link</option>
+              <option value="Asus">Asus</option>
+    </select>
+      </div>
+
+      <div class="ItemOpcionFiltrado">
+     <select name="" id="selectPrecio" class="item">
+      <option value="none">Precio</option>
+      <option value="50">0 - 50$</option>
+      <option value="250">0$ - 250$</option>
+      <option value="450">0$ - 450$</option>
+      <option value="800">0$ - 800$</option>
+      <option value="1100">0$ - 1100$</option>
+      <option value="1800">0$ a 1800$</option>
+    </select>
+      </div>
+
+      <div class="ItemOpcionFiltrado">
+    <select name="" id="selectProducto" class="item">
+      <option value="none">Producto</option>
+       <option value="telefono">Telefonos</option>
+        <option value="audifono">Audifonos</option>
+         <option value="videojuego">Video juegos</option>
+          <option value="teclado">Teclados</option>
+           <option value="monitor">Monitores</option>
+    </select>
+      </div>
+      <div>
+        <button class="btnBuscarFiltrado">Buscar</button>
+      </div>
+    </form>
+
+
   </div>
 
    

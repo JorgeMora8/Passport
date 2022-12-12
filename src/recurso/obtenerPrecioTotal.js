@@ -1,4 +1,4 @@
-import { ContenedorCarrito } from "../ContenedorMongoDB/DAOMongo.js";
+import { ContenedorCarrito } from "../Contenedores/DAO.js";
 
 
 export async function obtenerPrecioTotal() { 

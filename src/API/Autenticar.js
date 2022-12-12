@@ -1,7 +1,6 @@
-import {ContendorUsuarios} from "../ContenedorMongoDB/DAOMongo.js"; 
-import bcrypt from "bcrypt"
+import {ContendorUsuarios} from "../Contenedores/DAO.js"; 
+import bcrypt from "bcrypt"; 
 
-//=>Funcion para autenticar a los usuarios
 export function autenticar (username, password){
     return new Promise(async (resolve, reject) => {
         let usuario; 
